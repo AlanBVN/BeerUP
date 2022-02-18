@@ -118,7 +118,9 @@ export const Card = ({ meetup }) => {
                   fontSize="14px"
                   fontWeight="600"
                   variant="solid"
-                ></Badge>
+                >
+                  {meetup.date}
+                </Badge>
               </HStack>
               <Text color="gray.400" mt="6px" fontSize="24px" fontWeight="500">
                 {meetup.title}
