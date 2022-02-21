@@ -61,12 +61,7 @@ Dentro de la carpeta "backend":
 
 ### Frontend: puerto 3000
 ```bash
-- Dentro de la carpeta "frontend" crear un archivo .env con los siguientes datos:
-```
-```bash
-- MONGODB_URL = "dirección local de mongodb"
-- PORT = "puerto del backend"
-- SECRET_KEY = "secret key para bcrypt"
+- Dentro de la carpeta "frontend":
 ```
 ```bash
 Dentro de la carpeta "frontend": 
@@ -102,7 +97,7 @@ Dentro de la carpeta "frontend":
 El proyecto se encuentra publicado en:
 
 ```bash
-http://LINKDELDEPLOY.COM
+--
 ```
 
 
