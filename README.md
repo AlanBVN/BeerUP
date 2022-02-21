@@ -32,13 +32,7 @@ La aplicación cuanta con dos niveles de usuario: "User" y "Admin".
 - Visualizar las meetups activas y aquellas finalizadas.
 ```
 
-## Tecnologias utilizadas.
 
-### Frontend:
-React, Chakra-ui.   
-
-### Backend:
-Node, Express, Mongoose, MongoDB, JWT, bcrypt. 
 
 
 
@@ -60,9 +54,6 @@ Dentro de la carpeta "backend":
 ```
 
 ### Frontend: puerto 3000
-```bash
-- Dentro de la carpeta "frontend":
-```
 ```bash
 Dentro de la carpeta "frontend": 
 - npm install
@@ -91,6 +82,13 @@ Dentro de la carpeta "frontend":
 - Password: 12345
 ```
 
+## Tecnologias utilizadas.
+
+### Frontend:
+React, Chakra-ui.   
+
+### Backend:
+Node, Express, Mongoose, MongoDB, JWT, bcrypt. 
 
 ## Deployment
 
