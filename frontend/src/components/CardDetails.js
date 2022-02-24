@@ -13,7 +13,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CardImage from "../assets/bgcard2.jpg";
 import { MdLocationPin } from "react-icons/md";
 import { IoMdBeer } from "react-icons/io";
@@ -27,6 +27,9 @@ export const CardDetails = ({ meetup }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [state, setState] = useState("pending");
+  const isConfirmed = meetup.confirmed?.find((o) => o._id === user._id);
+
+  useEffect(() => {}, []);
 
   const handleConfirm = async (e) => {
     e.preventDefault();
@@ -49,8 +52,8 @@ export const CardDetails = ({ meetup }) => {
     toast({
       title: "Meetup Eliminada!",
       description: "La meetup ya ha sido eliminada de la página web.",
-      status: "Error",
-      duration: 6000,
+      status: "Success",
+      duration: 5000,
       isClosable: true,
     });
     await deleteMeetup(meetup._id);
@@ -132,16 +135,18 @@ export const CardDetails = ({ meetup }) => {
                   fontSize="14px"
                   fontWeight="600"
                   variant="solid"
-                ></Badge>
+                >
+                  {meetup.date}
+                </Badge>
               </HStack>
               <Text color="gray.400" mt="6px" fontSize="24px" fontWeight="500">
                 {meetup.title}
               </Text>
-              <VStack>
+              <Stack maxH="330px">
                 <Text
-                  mt="5px"
+                  mb="20px"
+                  mt="20px"
                   color="gray.300"
-                  minHeight="110px"
                   fontSize="14px"
                   fontWeight="500"
                 >
@@ -184,7 +189,7 @@ export const CardDetails = ({ meetup }) => {
                       color="orange.300"
                     />
                     <Text fontSize="13px" fontWeight="500" color="gray.200">
-                      {meetup.temp}
+                      {meetup.temp}°C
                     </Text>
                   </HStack>
                 </Box>
@@ -223,7 +228,43 @@ export const CardDetails = ({ meetup }) => {
                   </HStack>
                 </Box>
 
-                {user.role === "USER" ? (
+                {user.role === "USER" && !isConfirmed ? (
+                  <Center>
+                    <Button
+                      mt="15px"
+                      border="2px"
+                      bg="gray.800"
+                      borderColor="blue.900"
+                      py="4px"
+                      px="10px"
+                      rounded="5px"
+                      colorScheme="blue"
+                      onClick={handleConfirm}
+                      size="sm"
+                    >
+                      Confirmar asistencia
+                    </Button>
+                  </Center>
+                ) : null}
+                {user.role === "ADMIN" && isConfirmed ? (
+                  <Center>
+                    <Button
+                      mt="15px"
+                      border="2px"
+                      bg="red.800"
+                      borderColor="blue.900"
+                      py="4px"
+                      px="10px"
+                      rounded="5px"
+                      colorScheme="blue"
+                      onClick={handleDelete}
+                      size="sm"
+                    >
+                      Eliminar Meetup
+                    </Button>
+                  </Center>
+                ) : null}
+                {user.role === "ADMIN" && !isConfirmed ? (
                   <HStack
                     py="10px"
                     alignItems="center"
@@ -242,10 +283,6 @@ export const CardDetails = ({ meetup }) => {
                     >
                       Confirmar asistencia
                     </Button>
-                  </HStack>
-                ) : null}
-                {user.role === "ADMIN" ? (
-                  <Box>
                     <Button
                       mt="15px"
                       border="2px"
@@ -260,9 +297,9 @@ export const CardDetails = ({ meetup }) => {
                     >
                       Eliminar Meetup
                     </Button>
-                  </Box>
+                  </HStack>
                 ) : null}
-              </VStack>
+              </Stack>
             </Box>
           </VStack>
         </Box>
@@ -315,8 +352,8 @@ export const CardDetails = ({ meetup }) => {
                       <Stack direction="row" alignItems="center">
                         <Avatar
                           src={
-                            confirmed.name.image
-                              ? confirmed.name.image
+                            confirmed.image
+                              ? confirmed.image
                               : "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
                           }
                         />
@@ -340,6 +377,7 @@ export const CardDetails = ({ meetup }) => {
                 bg="gray.800"
               >
                 <Text
+                  mt="12px"
                   align="center"
                   fontSize="15px"
                   fontWeight="700"
@@ -401,8 +439,8 @@ export const CardDetails = ({ meetup }) => {
                       <Stack direction="row" alignItems="center">
                         <Avatar
                           src={
-                            invited.name.image
-                              ? invited.name.image
+                            invited.image
+                              ? invited.image
                               : "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
                           }
                         />
@@ -426,6 +464,7 @@ export const CardDetails = ({ meetup }) => {
                 bg="gray.800"
               >
                 <Text
+                  mt="12px"
                   align="center"
                   fontSize="15px"
                   fontWeight="700"
@@ -435,6 +474,13 @@ export const CardDetails = ({ meetup }) => {
                 </Text>
               </Box>
             )}
+            {user.role === "ADMIN" ? (
+              <Box py="20px">
+                <Button colorScheme="blue" size="sm">
+                  Invitar gente
+                </Button>
+              </Box>
+            ) : null}
           </VStack>
         </VStack>
       </HStack>

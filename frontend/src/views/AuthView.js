@@ -7,6 +7,8 @@ import {
   Tabs,
   TabPanel,
   Image,
+  Text,
+  HStack,
 } from "@chakra-ui/react";
 import React from "react";
 import { LoginView } from "./LoginView";
@@ -16,22 +18,28 @@ import UPlogo from "../assets/UP-logo2.png";
 
 const AuthView = () => {
   return (
-    <Box bg="gray.800" h="100vh">
+    <Box bg="gray.900" h="100vh">
       <Container maxW="xl" centerContent>
-        <Box
-          d="flex"
-          justifyContent="center"
-          p="12px"
-          w="100%"
-          mt="40px"
-          mb="15px"
-          borderRadius="3px"
-          bg="gray.900"
-          shadow="xl"
-        >
-          <Image src={UPlogo} w="250px" />
+        <Image mt="20px" src={UPlogo} w="270px" />
+        <Box mb="32px">
+          <HStack justifyContent="center" align-items="center">
+            <Text fontSize="32px" color="blue.500" fontWeight="bold">
+              "
+            </Text>
+            <Text
+              color="white"
+              fontSize="23px"
+              fontWeight="400"
+              textTransform="full-width"
+            >
+              Donde nacen tus encuentros.
+            </Text>
+            <Text fontSize="32px" color="blue.500" fontWeight="bold">
+              "
+            </Text>
+          </HStack>
         </Box>
-        <Box shadow="2xl" bg="gray.700" w="100%" p="16px" borderRadius="3px">
+        <Box shadow="2xl" bg="gray.800" w="100%" p="16px" rounded="6px">
           <Tabs variant="soft-rounded" colorScheme="gray">
             <TabList>
               <Tab

@@ -1,4 +1,12 @@
-import { Box, Text, Icon, VStack, HStack, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Icon,
+  VStack,
+  HStack,
+  Flex,
+  Center,
+} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { MdEmail } from "react-icons/md";
@@ -46,7 +54,7 @@ export const Notifications = () => {
           },
         }}
       >
-        {userData && userData.notifications ? (
+        {userData && userData.notifications.length > 0 ? (
           userData.notifications?.map((noti) => {
             return (
               <>
@@ -92,9 +100,11 @@ export const Notifications = () => {
           })
         ) : (
           <Box>
-            <Text color="gray.300" fontSize="24px" fontWeight="bold">
-              No tenes notificaciones
-            </Text>
+            <Center>
+              <Text color="gray.300" fontSize="24px" fontWeight="bold">
+                No tenes notificaciones
+              </Text>
+            </Center>
           </Box>
         )}
       </Box>

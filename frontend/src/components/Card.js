@@ -26,8 +26,7 @@ export const Card = ({ meetup }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [state, setState] = useState("pending");
-
-  useEffect(() => {}, []);
+  const isConfirmed = meetup.confirmed?.find((o) => o._id === user._id);
 
   const handleConfirm = async (e) => {
     e.preventDefault();
@@ -49,7 +48,14 @@ export const Card = ({ meetup }) => {
   return (
     <>
       <Link to={`/details/${meetup._id}`}>
-        <Box h="500px" w="100%" position="relative">
+        <Box
+          h="500px"
+          w="100%"
+          position="relative"
+          transform="auto"
+          transition="0.2s ease-in-out"
+          _hover={{ scale: "1.01" }}
+        >
           <Center>
             <Image
               src={CardImage}
@@ -64,7 +70,7 @@ export const Card = ({ meetup }) => {
           <VStack h="280px">
             <Box
               rounded="3px"
-              mt="-35px"
+              mt="-42px"
               w="305px"
               bg="gray.900"
               p="10px"
@@ -125,7 +131,7 @@ export const Card = ({ meetup }) => {
               <Text color="gray.400" mt="6px" fontSize="24px" fontWeight="500">
                 {meetup.title}
               </Text>
-              <VStack h="330px">
+              <VStack maxH="330px">
                 <Text
                   mt="5px"
                   color="gray.300"
@@ -211,9 +217,9 @@ export const Card = ({ meetup }) => {
                   </HStack>
                 </Box>
 
-                {state === "pending" ? (
+                {state === "pending" && !isConfirmed ? (
                   <HStack
-                    py="10px"
+                    pt="18px"
                     alignItems="center"
                     justifyContent="space-between"
                   >
@@ -232,21 +238,15 @@ export const Card = ({ meetup }) => {
                     </Button>
                   </HStack>
                 ) : (
-                  <Box pt="10px" pb="10px">
+                  <Box pt="20px" pb="10px">
                     <Text
                       fontWeight="700"
                       textTransform="uppercase"
-                      fontSize="14px"
+                      fontSize="13px"
                       letterSpacing="0.3px"
-                      color="gray.300"
+                      color="blue.300"
                     >
-                      Ya
-                      {state === "confirm"
-                        ? " confirmaste "
-                        : state === "reject"
-                        ? " rechazaste "
-                        : null}
-                      tu asistencia!
+                      Ya confirmaste tu asistencia!
                     </Text>
                   </Box>
                 )}

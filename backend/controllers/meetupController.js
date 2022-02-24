@@ -21,7 +21,7 @@ exports.createMeetup = async (req, res) => {
   try {
     return res.status(201).json(meetupToCreate);
   } catch (error) {
-    return res.status(500).json({ message: "Couldn't create the meetup'" });
+    return res.status(500).json({ message: "No se pudo crear la meetup" });
   }
 };
 

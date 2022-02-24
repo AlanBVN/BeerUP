@@ -86,7 +86,7 @@ export const CreateMeetup = () => {
     const weatherData = await weatherApi();
 
     const temp = weatherData.data?.find(
-      (elem) => elem.valid_date === moment("27-02-2022").format("YYYY-MM-DD")
+      (elem) => elem.valid_date === moment("27-02-2022").format("YYYY-MM-DD") //SelectedDateToCreate
     );
 
     let max_temp;

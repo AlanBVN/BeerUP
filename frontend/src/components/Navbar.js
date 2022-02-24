@@ -15,20 +15,42 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { FaBeer } from "react-icons/fa";
-import { MdMail, MdLogout } from "react-icons/md";
+import { MdLogout } from "react-icons/md";
+import { BsFillCalendarCheckFill } from "react-icons/bs";
 import { HiBell } from "react-icons/hi";
+import { AiFillPlusCircle } from "react-icons/ai";
 import { CreateMeetup } from "../views/CreateMeetup";
 import { Notifications } from "./Notifications";
 import { logOut } from "../services/authServices";
 import upLogo from "../assets/UP-logo2.png";
 import { Link } from "react-router-dom";
+import { MyMeetups } from "./MyMeetups";
+import { FinishedMeetups } from "./FinishedMeetups";
 
 const Navbar = ({ user, userApi }) => {
+  // Crear meetup
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  // Notifaciones
   const {
     isOpen: isOpenReportModal,
     onOpen: onOpenReportModal,
     onClose: onCloseReportModal,
+  } = useDisclosure();
+
+  // Mis Meetups
+  const {
+    isOpen: isOpenMyMeetupsModal,
+    onOpen: onOpenMyMeetupsModal,
+    onClose: onCloseMyMeetupsModal,
+  } = useDisclosure();
+
+  // Meetups finalizados
+
+  const {
+    isOpen: isOpenFinishedMeetupsModal,
+    onOpen: onOpenFinishedMeetupsModal,
+    onClose: onCloseFinishedMeetupsModal,
   } = useDisclosure();
 
   return (
@@ -36,8 +58,18 @@ const Navbar = ({ user, userApi }) => {
       <VStack p={4} justifyContent="space-between" alignItems="center" w="full">
         <VStack>
           <Link to="/">
-            <Image src={upLogo} />
+            <Image _hover={{ opacity: 0.8 }} src={upLogo} />
           </Link>
+          <Image
+            rounded="full"
+            w="60px"
+            border="2px"
+            borderColor="blue.400"
+            src={
+              user.image ||
+              "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+            }
+          />
           <Text
             fontSize="14px"
             textTransform="capitalize"
@@ -49,8 +81,6 @@ const Navbar = ({ user, userApi }) => {
           <Text> 👋 </Text>
         </VStack>
         <VStack position="relative" spacing={3}>
-          <Image src={MdMail} mb={6} />
-
           <IconButton
             onClick={onOpenReportModal}
             w="45px"
@@ -86,40 +116,76 @@ const Navbar = ({ user, userApi }) => {
               </Text>
             </Box>
           )}
-          <Tooltip
-            label="Mis Meetups"
-            placement="right"
-            rounded="md"
-            backgroundColor="blue.500"
-            color="white"
-            fontWeight="600"
-          >
-            <IconButton
-              w="45px"
-              h="45px"
-              color="blue.400"
+
+          <IconButton
+            onClick={onOpenMyMeetupsModal}
+            w="45px"
+            h="45px"
+            color="blue.400"
+            bg="gray.800"
+            icon={<FaBeer size="22px" />}
+            aria-label="Meetups"
+            _hover={{ color: "gray.500" }}
+          />
+          <Modal isOpen={isOpenMyMeetupsModal} onClose={onCloseMyMeetupsModal}>
+            <ModalOverlay />
+            <ModalContent
+              h="650"
+              py="20px"
               bg="gray.800"
-              // onClick={handleClickMyMeetups}
-              icon={<FaBeer size="22px" />}
-              aria-label="Meetups"
-              _hover={{ color: "gray.500" }}
-            />
-          </Tooltip>
+              rounded="4px"
+              minW="750px"
+            >
+              <ModalCloseButton color="white" backgroundColor="gray.700" />
+              <ModalBody>
+                <MyMeetups />
+              </ModalBody>
+            </ModalContent>
+          </Modal>
+          <IconButton
+            onClick={onOpenFinishedMeetupsModal}
+            w="45px"
+            h="45px"
+            color="blue.400"
+            bg="gray.800"
+            icon={<BsFillCalendarCheckFill size="22px" />}
+            aria-label="Meetups finalizados"
+            _hover={{ color: "gray.500" }}
+          />
+          <Modal
+            isOpen={isOpenFinishedMeetupsModal}
+            onClose={onCloseFinishedMeetupsModal}
+          >
+            <ModalOverlay />
+            <ModalContent
+              h="650"
+              py="20px"
+              bg="gray.800"
+              rounded="4px"
+              minW="750px"
+            >
+              <ModalCloseButton color="white" backgroundColor="gray.700" />
+              <ModalBody>
+                <FinishedMeetups />
+              </ModalBody>
+            </ModalContent>
+          </Modal>
         </VStack>
         <VStack>
           {userApi?.role === "ADMIN" ? (
             <>
               <Button
+                leftIcon={<AiFillPlusCircle />}
                 w="100px"
                 mb="15px"
                 color="gray.700"
-                fontSize="14px"
-                fontWeight="700"
+                fontSize="15px"
+                fontWeight="800"
                 colorScheme="yellow"
                 onClick={onOpen}
                 rounded="3px"
               >
-                Crear Meetup
+                Meetup
               </Button>
               <Modal
                 motionPreset="slideInBottom"

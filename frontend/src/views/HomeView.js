@@ -22,8 +22,9 @@ export const HomeView = () => {
 
   useEffect(() => {
     const getAllMetups = async () => {
-      const res = await getMeetups();
-      setMeetups(res);
+      const { data } = await getMeetups();
+      const resFiltered = data.filter((e) => e.status === "INCOMING");
+      setMeetups(resFiltered);
     };
     getAllMetups();
   }, []);
@@ -31,14 +32,7 @@ export const HomeView = () => {
   return (
     <>
       <HStack h="100vh" bg="gray.800" spacing={0}>
-        <Flex
-          zIndex="999"
-          h="full"
-          bg="gray.900"
-          w="full"
-          maxW="130px"
-          shadow="2xl"
-        >
+        <Flex h="full" bg="gray.900" w="full" maxW="130px" shadow="2xl">
           <Navbar user={user} userApi={userData} />
         </Flex>
         <Flex
@@ -56,7 +50,7 @@ export const HomeView = () => {
             },
           }}
           w="full"
-          p="20px"
+          p="50px"
           h="full"
           flex={1}
           borderRightColor="gray.700"
@@ -64,8 +58,8 @@ export const HomeView = () => {
           justifyContent="center"
         >
           <Stack>
-            <SimpleGrid columns={3} gap="60px">
-              {meetups.data?.map((meetup) => (
+            <SimpleGrid columns={4} gap="40px">
+              {meetups?.map((meetup) => (
                 <Card meetup={meetup} />
               ))}
             </SimpleGrid>

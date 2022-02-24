@@ -83,7 +83,7 @@ exports.editUser = async (req, res) => {
 exports.getSingleUser = async (req, res) => {
   const { userId } = req.params;
   const singleUser = await User.findById(userId)
-    .populate("meetups", ["_id", "date", "status"])
+    .populate("meetups")
     .populate("notifications", ["_id", "host", "title"]);
 
   try {
