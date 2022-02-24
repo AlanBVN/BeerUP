@@ -32,13 +32,7 @@ La aplicación cuanta con dos niveles de usuario: "User" y "Admin".
 - Visualizar las meetups activas y aquellas finalizadas.
 ```
 
-## Tecnologias utilizadas.
 
-### Frontend:
-React, Chakra-ui.   
-
-### Backend:
-Node, Express, Mongoose, MongoDB, JWT, bcrypt. 
 
 
 
@@ -60,14 +54,6 @@ Dentro de la carpeta "backend":
 ```
 
 ### Frontend: puerto 3000
-```bash
-- Dentro de la carpeta "frontend" crear un archivo .env con los siguientes datos:
-```
-```bash
-- MONGODB_URL = "dirección local de mongodb"
-- PORT = "puerto del backend"
-- SECRET_KEY = "secret key para bcrypt"
-```
 ```bash
 Dentro de la carpeta "frontend": 
 - npm install
@@ -96,13 +82,20 @@ Dentro de la carpeta "frontend":
 - Password: 12345
 ```
 
+## Tecnologias utilizadas.
+
+### Frontend:
+React, Chakra-ui.   
+
+### Backend:
+Node, Express, Mongoose, MongoDB, JWT, bcrypt. 
 
 ## Deployment
 
 El proyecto se encuentra publicado en:
 
 ```bash
-http://LINKDELDEPLOY.COM
+--
 ```
 
 
