@@ -4,7 +4,7 @@ const generateJwt = (id) => {
   return new Promise((resolve, reject) => {
     jwt.sign(
       { id },
-      process.env.SECRET_KEY,
+      "asderfgds2345352jkj234",
       { expiresIn: "4h" },
       (err, token) => {
         if (err) {

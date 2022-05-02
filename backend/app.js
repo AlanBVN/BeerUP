@@ -11,7 +11,7 @@ require ("dotenv").config();
 
 //conexiones
 mongoose
-  .connect(process.env.MONGODB_URL)
+  .connect("mongodb://localhost/beerUp")
   .then(() => console.log("Connected to DB 🔌"))
   .catch(() => console.log("Couldn't connect to DB ❌"));
 
@@ -29,7 +29,7 @@ app.use("/api/meetup", require("./routes/meetup"))
 //listen on server
 port = process.env.PORT
 
-app.listen(port, () => {
+app.listen(5000, () => {
   console.log("server running...");
 });
 
